@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KARMEN MARIA CHALITA VELAZQUEZ – CV</title>
-  <meta name="description" content="Currículum de  KARMEN MARIA CHALITA VELAZQUEZ, programadora en sistemas." />
+  <meta name="description" content="Currículum de KARMEN MARIA CHALITA VELAZQUEZ, programadora en sistemas." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
@@ -13,7 +13,7 @@
       --card: #f7f7f8;
       --text: #0f1222;
       --muted: #5b6072;
-      --primary: #3b82f6; /* azul elegante */
+      --primary: #3b82f6;
       --accent: #111827;
       --border: #e6e6eb;
       --chip: #eef2ff;
@@ -39,8 +39,9 @@
     html, body {
       background: var(--bg);
       color: var(--text);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.45;
+      transition: background 0.3s, color 0.3s;
     }
     a { color: var(--link); text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -56,19 +57,13 @@
       align-items: center;
       margin-bottom: 22px;
     }
-    .id {
-      display: grid;
-      gap: 8px;
-    }
+    .id { display: grid; gap: 8px; }
     .name {
       font-size: clamp(26px, 4vw, 36px);
       font-weight: 700;
       letter-spacing: .2px;
     }
-    .title {
-      color: var(--muted);
-      font-weight: 600;
-    }
+    .title { color: var(--muted); font-weight: 600; }
     .meta {
       display: flex; flex-wrap: wrap; gap: 10px 16px; color: var(--muted);
       font-size: 14px;
@@ -78,6 +73,7 @@
       appearance: none; border: 1px solid var(--border); background: var(--card);
       color: var(--text); padding: 10px 14px; border-radius: 999px; cursor: pointer;
       box-shadow: var(--shadow); font-weight: 600;
+      transition: all 0.2s;
     }
     .btn:hover { transform: translateY(-1px); }
     .btn.primary { background: var(--primary); color:white; border-color: transparent; }
@@ -103,12 +99,8 @@
       width:8px; height:8px; border-radius:50%; background: var(--primary); display:inline-block;
     }
     .lead { color: var(--muted); }
-    .list {
-      display: grid; gap: 14px;
-    }
-    .item {
-      display: grid; gap: 6px;
-    }
+    .list { display: grid; gap: 14px; }
+    .item { display: grid; gap: 6px; }
     .role { font-weight: 700; }
     .where { color: var(--muted); font-weight: 600; }
     .time { color: var(--muted); font-size: 13px; }
@@ -132,18 +124,19 @@
     footer {
       margin-top: 26px; color: var(--muted); text-align: center; font-size: 13px;
     }
+    .sep { height:1px; background: var(--border); margin: 10px 0 0 0; }
+
     /* Print-friendly */
     @media print {
       .actions { display: none !important; }
       .wrap { margin: 0; padding: 0; }
-      .card { box-shadow: none; }
+      .card { box-shadow: none; border: none; }
       a { text-decoration: none; color: inherit; }
       body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
     @media (max-width: 820px) {
       .grid { grid-template-columns: 1fr; }
     }
-    .sep { height:1px; background: var(--border); margin: 10px 0 0 0; }
   </style>
 </head>
 <body>
@@ -151,8 +144,7 @@
     <header aria-label="encabezado">
       <div class="id">
         <div class="name">KARMEN MARIA CHALITA VELAZQUEZ</div>
-        <!-- Título bilingüe para evitar más lógica -->
-        <div class="title">Ingeniería en Computación · Computer Engineering · Full-Stack Developer</div>
+        <div class="title" id="headerTitle">INGENIERIA EN COMPUTACION · Full-Stack</div>
         <div class="meta">
           <span>Guadalajara, Mexico</span>
           <span>·</span>
@@ -164,30 +156,27 @@
         </div>
       </div>
       <div class="actions">
-        <button class="btn" id="langBtn" aria-label="Cambiar idioma">English</button>
+        <button class="btn" id="langBtn">English</button>
         <button class="btn" id="themeBtn" aria-label="Alternar tema">Modo oscuro</button>
-        <button class="btn primary" onclick="window.print()" aria-label="Imprimir CV">Imprimir</button>
+        <button class="btn primary" onclick="window.print()" aria-label="Imprimir CV" id="printBtn">Imprimir</button>
       </div>
     </header>
 
-    <!-- CV EN ESPAÑOL -->
-    <main id="cv-es" class="grid" role="main">
-      <!-- Columna izquierda -->
-      <section class="card" aria-label="resumen-es">
-        <h2><span class="dot"></span> Perfil</h2>
-        <p class="lead">
+    <main class="grid" role="main">
+      <section class="card" aria-label="resumen">
+        <h2><span class="dot"></span> <span id="t-profile">Perfil</span></h2>
+        <p class="lead" id="profileDesc">
           Ingeniera en Computación con especial interés en el desarrollo de software y la Inteligencia Artificial. Mi objetivo es contribuir en la creación de soluciones que no solo sean tecnológicamente avanzadas, sino que también resuelvan necesidades reales, haciendo hincapié en un diseño centrado en el usuario. Mi formación me ha preparado para integrarme en un equipo de desarrollo y aportar una visión práctica y orientada a resultados.
         </p>
       </section>
 
-      <section class="card" aria-label="competencias-es">
-        <h2><span class="dot"></span> Competencias técnicas</h2>
+      <section class="card" aria-label="competencias">
+        <h2><span class="dot"></span> <span id="t-skills">Competencias técnicas</span></h2>
         <div class="chips">
           <span class="chip">JavaScript (ES2023)</span>
           <span class="chip">C#</span>
           <span class="chip">HTML5</span>
           <span class="chip">CSS3</span>
-          <span class="chip">HTML</span>
           <span class="chip">Workbench</span>
           <span class="chip">WordPress</span>
           <span class="chip">Python</span>
@@ -197,13 +186,13 @@
         </div>
       </section>
 
-      <section class="card" aria-label="experiencia-es">
-        <h2><span class="dot"></span> Experiencia</h2>
+      <section class="card" aria-label="experiencia">
+        <h2><span class="dot"></span> <span id="t-exp">Experiencia</span></h2>
         <div class="list">
           <article class="item">
-            <div class="role">Web Manager and Designer – <span class="where">JMOV.PHOTOGRAPHY</span></div>
-            <div class="time">ENERO/2022 – Actual · Puerto Vallarta Jal · remoto</div>
-            <ul class="bullets">
+            <div class="role" id="role1">Web Manager and Designer – <span class="where">JMOV.PHOTOGRAPHY</span></div>
+            <div class="time" id="time1">ENERO/2022 – Actual · Puerto Vallarta Jal / Remoto</div>
+            <ul class="bullets" id="desc1">
               <li>Diseño y gestión de páginas web.</li>
               <li>Mantenimiento y soporte técnico en plataformas digitales.</li>
               <li>Implementación de estrategias de marketing digital.</li>
@@ -211,9 +200,9 @@
           </article>
 
           <article class="item">
-            <div class="role">Encargada de Base de Datos y Control de inventario – <span class="where">Joyeria Satinova</span></div>
-            <div class="time">ENERO/2024 – JUNIO/2025 · Puerto Vallarta Jal</div>
-            <ul class="bullets">
+            <div class="role" id="role2">Encargada de Base de Datos e Inventario – <span class="where">Joyeria Satinova</span></div>
+            <div class="time" id="time2">ENERO /2024 – JUNIO/2025 · Puerto Vallarta Jal</div>
+            <ul class="bullets" id="desc2">
               <li>Gestión completa del inventario: selección, registro y control de piezas de joyería.</li>
               <li>Ingreso de productos al sistema de ventas con información detallada.</li>
             </ul>
@@ -221,339 +210,248 @@
         </div>
       </section>
 
-      <section class="card" aria-label="proyectos-es">
-        <h2><span class="dot"></span> Proyectos destacados</h2>
+      <section class="card" aria-label="proyectos">
+        <h2><span class="dot"></span> <span id="t-projects">Proyectos destacados</span></h2>
         <div class="list">
-          <article class="item">
-            <div class="role">FRIEMK'S</div>
-            <ul class="bullets">
-              <li>Reconocimiento de emociones con Inteligencia Artificial.</li>
-            </ul>
-          </article>
-          <article class="item">
-            <div class="role">Sistema de gestión de incidencias SEP</div>
-            <ul class="bullets">
-              <li>Gestión y optimización al momento de realizar reportes de incidencias escolares.</li>
-            </ul>
-          </article>
+            <article class="item">
+                <div class="role">FRIEMK'S</div>
+                <ul class="bullets" id="proj1">
+                    <li>Reconocimiento de emociones con Inteligencia Artificial.</li>
+                </ul>
+            </article>
+            
+            <article class="item">
+                <div class="role" id="projTitle2">Sistema de gestión de incidencias SEP</div>
+                <ul class="bullets" id="proj2">
+                    <li>Gestión y optimización al momento de realizar reportes de incidencias escolares.</li>
+                </ul>
+            </article>
         </div>
       </section>
 
-      <!-- Columna derecha -->
-      <section class="card" aria-label="educacion-es">
-        <h2><span class="dot"></span> Educación</h2>
-        <div class="list">
-          <div class="twocol">
+      <div> 
+        <section class="card" style="margin-bottom: 22px;" aria-label="educacion">
+            <h2><span class="dot"></span> <span id="t-edu">Educación</span></h2>
+            <div class="list">
+            <div class="twocol">
+                <div>
+                <div class="role" id="eduTitle">Ingeniería en computacion</div>
+                <div class="where">Universidad de Guadalajara</div>
+                </div>
+                <div class="right" id="eduDate">Egreso: 2024</div>
+            </div>
+            </div>
+        </section>
+
+        <section class="card" style="margin-bottom: 22px;" aria-label="certificaciones">
+            <h2><span class="dot"></span> <span id="t-certs">Certificaciones</span></h2>
+            <div class="list">
+                <div class="twocol">
+                    <div>Introduction to Modern AI (Networking Academy)</div>
+                    <div class="right">2024</div>
+                </div>
+                <div class="twocol">
+                    <div id="cert2">Administración de Amenazas Cibernéticas (UDG)</div>
+                    <div class="right">2024</div>
+                </div>
+                <div class="twocol">
+                    <div id="cert3">Introducción a Ciberseguridad (Networking Academy)</div>
+                    <div class="right">2024</div>
+                </div>
+                <div class="twocol">
+                    <div id="cert4">Introducción al Internet de las Cosas y Transformación Digital</div>
+                    <div class="right">2024</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card" aria-label="stack y herramientas">
+            <h2><span class="dot"></span> Stack & Tools</h2>
+            <div class="mix">
             <div>
-              <div class="role">Ingeniería en computación</div>
-              <div class="where">Universidad de Guadalajara</div>
+                <div class="where" style="margin-bottom:6px;" id="t-lang">Lenguajes</div>
+                <div class="chips">
+                <span class="chip">JavaScript</span><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">C#</span>
+                </div>
             </div>
-            <div class="right">Fecha de egreso: 2024</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card" aria-label="certificaciones-es">
-        <h2><span class="dot"></span> Certificaciones</h2>
-        <div class="list">
-          <div class="twocol">
-            <div>Introduction to Modern AI (Networking Academy)</div>
-            <div class="right">2024</div>
-          </div>
-          <div class="twocol">
-            <div>Administración de Amenazas Cibernéticas (UDG)</div>
-            <div class="right">2024</div>
-          </div>
-          <div class="twocol">
-            <div>Introducción a Ciberseguridad (Networking Academy)</div>
-            <div class="right">2024</div>
-          </div>
-          <div class="twocol">
-            <div>Introducción al Internet de las Cosas y Transformación Digital (Networking Academy)</div>
-            <div class="right">2024</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card" aria-label="stack-es">
-        <h2><span class="dot"></span> Stack & herramientas</h2>
-        <div class="mix">
-          <div>
-            <div class="where" style="margin-bottom:6px;">Lenguajes</div>
-            <div class="chips">
-              <span class="chip">JavaScript</span>
-              <span class="chip">Python</span>
-              <span class="chip">SQL</span>
-              <span class="chip">C#</span>
-            </div>
-          </div>
-          <div>
-            <div class="where" style="margin-bottom:6px;">Herramientas</div>
-            <div class="chips">
-              <span class="chip">VS Code</span>
-            </div>
-          </div>
-        </div>
-        <div class="sep"></div>
-        <div class="mix" style="margin-top:10px;">
-          <div>
-            <div class="where" style="margin-bottom:6px;">Idiomas</div>
-            <div class="chips">
-              <span class="chip">Español (nativo)</span>
-              <span class="chip">Inglés (B1)</span>
-            </div>
-          </div>
-          <div>
-            <div class="where" style="margin-bottom:6px;">Intereses</div>
-            <div class="chips">
-              <span class="chip">Arquitectura de software</span>
-              <span class="chip">Desarrollo Web</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card" aria-label="logros-es">
-        <h2><span class="dot"></span> Logros</h2>
-        <ul class="bullets">
-          <li>Vicepresidenta del Consejo Estudiantil del área de Ingenierías.— 2023-2024 (UDG)</li>
-          <li>Proyecto FRIEMK'S: Reconocimiento de emociones con Inteligencia Artificial— 2023- (Universidad Konrad Lorenz, Bogotá)</li>
-          <li>Sistema de gestión de incidencias para la Secundaria Técnica No. 105 — 2024.</li>
-        </ul>
-      </section>
-    </main>
-
-    <!-- CV EN INGLÉS -->
-    <main id="cv-en" class="grid" role="main" style="display:none;">
-      <!-- Left column -->
-      <section class="card" aria-label="summary-en">
-        <h2><span class="dot"></span> Profile</h2>
-        <p class="lead">
-          Computer Engineer with a strong interest in software development and Artificial Intelligence. My goal is to contribute to the creation of solutions that are not only technologically advanced but also address real-world needs, with a strong focus on user-centered design. My academic background has prepared me to join development teams and add a practical, results-oriented perspective.
-        </p>
-      </section>
-
-      <section class="card" aria-label="skills-en">
-        <h2><span class="dot"></span> Technical Skills</h2>
-        <div class="chips">
-          <span class="chip">JavaScript (ES2023)</span>
-          <span class="chip">C#</span>
-          <span class="chip">HTML5</span>
-          <span class="chip">CSS3</span>
-          <span class="chip">HTML</span>
-          <span class="chip">Workbench</span>
-          <span class="chip">WordPress</span>
-          <span class="chip">Python</span>
-          <span class="chip">Sublime Text</span>
-          <span class="chip">SQL (MySQL)</span>
-          <span class="chip">GitHub</span>
-        </div>
-      </section>
-
-      <section class="card" aria-label="experience-en">
-        <h2><span class="dot"></span> Experience</h2>
-        <div class="list">
-          <article class="item">
-            <div class="role">Web Manager and Designer – <span class="where">JMOV.PHOTOGRAPHY</span></div>
-            <div class="time">Jan/2022 – Present · Puerto Vallarta, Jal · Remote</div>
-            <ul class="bullets">
-              <li>Design and management of websites.</li>
-              <li>Maintenance and technical support for digital platforms.</li>
-              <li>Implementation of digital marketing strategies.</li>
-            </ul>
-          </article>
-
-          <article class="item">
-            <div class="role">Database and Inventory Control Manager – <span class="where">Joyeria Satinova</span></div>
-            <div class="time">Jan/2024 – Jun/2025 · Puerto Vallarta, Jal</div>
-            <ul class="bullets">
-              <li>Full inventory management: selection, record keeping and control of jewelry pieces.</li>
-              <li>Product entry into the point-of-sale system with detailed information.</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section class="card" aria-label="projects-en">
-        <h2><span class="dot"></span> Highlighted Projects</h2>
-        <div class="list">
-          <article class="item">
-            <div class="role">FRIEMK'S</div>
-            <ul class="bullets">
-              <li>Emotion recognition using Artificial Intelligence.</li>
-            </ul>
-          </article>
-          <article class="item">
-            <div class="role">School Incident Management System (SEP)</div>
-            <ul class="bullets">
-              <li>Management and optimization of school incident reporting.</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <!-- Right column -->
-      <section class="card" aria-label="education-en">
-        <h2><span class="dot"></span> Education</h2>
-        <div class="list">
-          <div class="twocol">
             <div>
-              <div class="role">Computer Engineering</div>
-              <div class="where">University of Guadalajara</div>
+                <div class="where" style="margin-bottom:6px;" id="t-tools">Herramientas</div>
+                <div class="chips">
+                <span class="chip">VS Code</span>
+                </div>
             </div>
-            <div class="right">Graduation date: 2024</div>
-          </div>
-        </div>
-      </section>
+            </div>
+            <div class="sep"></div>
+            <div class="mix" style="margin-top:10px;">
+            <div>
+                <div class="where" style="margin-bottom:6px;" id="t-languages">Idiomas</div>
+                <div class="chips">
+                <span class="chip" id="lang-es">Español (Nativo)</span><span class="chip" id="lang-en">Inglés (B1)</span>
+                </div>
+            </div>
+            <div>
+                <div class="where" style="margin-bottom:6px;" id="t-interests">Intereses</div>
+                <div class="chips">
+                <span class="chip" id="int1">Arquitectura de software</span><span class="chip" id="int2">Desarrollo Web</span>
+                </div>
+            </div>
+            </div>
+        </section>
 
-      <section class="card" aria-label="certifications-en">
-        <h2><span class="dot"></span> Certifications</h2>
-        <div class="list">
-          <div class="twocol">
-            <div>Introduction to Modern AI (Networking Academy)</div>
-            <div class="right">2024</div>
-          </div>
-          <div class="twocol">
-            <div>Cyber Threat Management (UDG)</div>
-            <div class="right">2024</div>
-          </div>
-          <div class="twocol">
-            <div>Introduction to Cybersecurity (Networking Academy)</div>
-            <div class="right">2024</div>
-          </div>
-          <div class="twocol">
-            <div>Introduction to the Internet of Things and Digital Transformation (Networking Academy)</div>
-            <div class="right">2024</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card" aria-label="stack-en">
-        <h2><span class="dot"></span> Stack & Tools</h2>
-        <div class="mix">
-          <div>
-            <div class="where" style="margin-bottom:6px;">Programming languages</div>
-            <div class="chips">
-              <span class="chip">JavaScript</span>
-              <span class="chip">Python</span>
-              <span class="chip">SQL</span>
-              <span class="chip">C#</span>
-            </div>
-          </div>
-          <div>
-            <div class="where" style="margin-bottom:6px;">Tools</div>
-            <div class="chips">
-              <span class="chip">VS Code</span>
-            </div>
-          </div>
-        </div>
-        <div class="sep"></div>
-        <div class="mix" style="margin-top:10px;">
-          <div>
-            <div class="where" style="margin-bottom:6px;">Languages</div>
-            <div class="chips">
-              <span class="chip">Spanish (native)</span>
-              <span class="chip">English (B1)</span>
-            </div>
-          </div>
-          <div>
-            <div class="where" style="margin-bottom:6px;">Interests</div>
-            <div class="chips">
-              <span class="chip">Software architecture</span>
-              <span class="chip">Web development</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card" aria-label="achievements-en">
-        <h2><span class="dot"></span> Achievements</h2>
-        <ul class="bullets">
-          <li>Vice President of the Engineering Student Council — 2023–2024 (UDG).</li>
-          <li>FRIEMK'S project: Emotion recognition using Artificial Intelligence — 2023– (Konrad Lorenz University, Bogotá).</li>
-          <li>Incident management system for Middle School No. 105 — 2024.</li>
-        </ul>
-      </section>
+        <section class="card" style="margin-top: 22px;" aria-label="logros">
+             <h2><span class="dot"></span> <span id="t-achieve">Logros</span></h2>
+             <ul class="bullets" id="achieveList">
+                 <li>Vicepresidenta del Consejo Estudiantil del área de Ingenierías — 2023-2024 (UDG)</li>
+                 <li>Proyecto FRIEMK'S: Reconocimiento de emociones con Inteligencia Artificial — 2023 (Universidad Konrad Lorenz, Bogotá)</li>
+                 <li>Sistema de gestión de incidencias para la Secundaria Técnica No. 105 — 2024</li>
+             </ul>
+        </section>
+      </div>
     </main>
 
     <footer>
-      © 2025 · KMCHV — Documento generado en HTML.
+      © 2025 · KMCHV — <span id="footerText">Documento generado en HTML.</span>
     </footer>
   </div>
 
   <script>
-    // Modo claro/oscuro con persistencia (robusto con try/catch)
+    // --- Lógica de Traducción ---
+    const translations = {
+        es: {
+            btn: "English",
+            print: "Imprimir",
+            headerTitle: "INGENIERIA EN COMPUTACION · Full-Stack",
+            t_profile: "Perfil",
+            profileDesc: "Ingeniera en Computación con especial interés en el desarrollo de software y la Inteligencia Artificial. Mi objetivo es contribuir en la creación de soluciones que no solo sean tecnológicamente avanzadas, sino que también resuelvan necesidades reales, haciendo hincapié en un diseño centrado en el usuario. Mi formación me ha preparado para integrarme en un equipo de desarrollo y aportar una visión práctica y orientada a resultados.",
+            t_skills: "Competencias técnicas",
+            t_exp: "Experiencia",
+            role1: 'Web Manager and Designer – <span class="where">JMOV.PHOTOGRAPHY</span>',
+            time1: "ENERO/2022 – Actual · Puerto Vallarta Jal / Remoto",
+            desc1: "<li>Diseño y gestión de páginas web.</li><li>Mantenimiento y soporte técnico en plataformas digitales.</li><li>Implementación de estrategias de marketing digital.</li>",
+            role2: 'Encargada de Base de Datos e Inventario – <span class="where">Joyeria Satinova</span>',
+            time2: "ENERO /2024 – JUNIO/2025 · Puerto Vallarta Jal",
+            desc2: "<li>Gestión completa del inventario: selección, registro y control de piezas de joyería.</li><li>Ingreso de productos al sistema de ventas con información detallada.</li>",
+            t_projects: "Proyectos destacados",
+            proj1: "<li>Reconocimiento de emociones con Inteligencia Artificial.</li>",
+            projTitle2: "Sistema de gestión de incidencias SEP",
+            proj2: "<li>Gestión y optimización al momento de realizar reportes de incidencias escolares.</li>",
+            t_edu: "Educación",
+            eduTitle: "Ingeniería en computación",
+            eduDate: "Fecha de Egreso: 2024",
+            t_certs: "Certificaciones",
+            cert2: "Administración de Amenazas Cibernéticas (UDG)",
+            cert3: "Introducción a Ciberseguridad (Networking Academy)",
+            cert4: "Introducción al Internet de las Cosas y Transformación Digital",
+            t_lang: "Lenguajes",
+            t_tools: "Herramientas",
+            t_languages: "Idiomas",
+            lang_es: "Español (Nativo)",
+            lang_en: "Inglés (B1)",
+            t_interests: "Intereses",
+            int1: "Arquitectura de software",
+            int2: "Desarrollo Web",
+            t_achieve: "Logros",
+            achieveList: "<li>Vicepresidenta del Consejo Estudiantil del área de Ingenierías — 2023-2024 (UDG)</li><li>Proyecto FRIEMK'S: Reconocimiento de emociones con Inteligencia Artificial — 2023 (Universidad Konrad Lorenz, Bogotá)</li><li>Sistema de gestión de incidencias para la Secundaria Técnica No. 105 — 2024</li>",
+            footerText: "Documento generado en HTML."
+        },
+        en: {
+            btn: "Español",
+            print: "Print",
+            headerTitle: "COMPUTER ENGINEERING · Full-Stack",
+            t_profile: "Profile",
+            profileDesc: "Computer Engineer with a special interest in software development and Artificial Intelligence. My goal is to contribute to creating solutions that are not only technologically advanced but also solve real needs, emphasizing user-centered design. My background has prepared me to integrate into a development team and provide a practical, results-oriented vision.",
+            t_skills: "Technical Skills",
+            t_exp: "Experience",
+            role1: 'Web Manager and Designer – <span class="where">JMOV.PHOTOGRAPHY</span>',
+            time1: "JANUARY/2022 – Present · Puerto Vallarta Jal / Remote",
+            desc1: "<li>Web page design and management.</li><li>Maintenance and technical support on digital platforms.</li><li>Implementation of digital marketing strategies.</li>",
+            role2: 'Database and Inventory Manager – <span class="where">Joyeria Satinova</span>',
+            time2: "JANUARY /2024 – JUNE/2025 · Puerto Vallarta Jal",
+            desc2: "<li>Complete inventory management: selection, registration, and control of jewelry pieces.</li><li>Product entry into the sales system with detailed information.</li>",
+            t_projects: "Featured Projects",
+            proj1: "<li>Emotion recognition using Artificial Intelligence.</li>",
+            projTitle2: "SEP Incident Management System",
+            proj2: "<li>Management and optimization of school incident reporting.</li>",
+            t_edu: "Education",
+            eduTitle: "Computer Engineering",
+            eduDate: "Graduation Date: 2024",
+            t_certs: "Certifications",
+            cert2: "Cyber Threat Management (UDG)",
+            cert3: "Introduction to Cybersecurity (Networking Academy)",
+            cert4: "Introduction to IoT and Digital Transformation",
+            t_lang: "Coding Languages",
+            t_tools: "Tools",
+            t_languages: "Languages",
+            lang_es: "Spanish (Native)",
+            lang_en: "English (B1)",
+            t_interests: "Interests",
+            int1: "Software Architecture",
+            int2: "Web Development",
+            t_achieve: "Achievements",
+            achieveList: "<li>Vice President of the Student Council for Engineering — 2023-2024 (UDG)</li><li>FRIEMK'S Project: Emotion recognition with AI — 2023 (Konrad Lorenz University, Bogotá)</li><li>Incident management system for Technical High School No. 105 — 2024</li>",
+            footerText: "Document generated in HTML."
+        }
+    };
+
+    let currentLang = 'es';
+
+    document.getElementById('langBtn').addEventListener('click', () => {
+        // Alternar idioma
+        currentLang = currentLang === 'es' ? 'en' : 'es';
+        const t = translations[currentLang];
+
+        // Actualizar textos simples
+        document.getElementById('langBtn').textContent = t.btn;
+        document.getElementById('printBtn').textContent = t.print;
+        document.getElementById('headerTitle').textContent = t.headerTitle;
+        document.getElementById('t-profile').textContent = t.t_profile;
+        document.getElementById('profileDesc').textContent = t.profileDesc;
+        document.getElementById('t-skills').textContent = t.t_skills;
+        document.getElementById('t-exp').textContent = t.t_exp;
+        document.getElementById('t-projects').textContent = t.t_projects;
+        document.getElementById('t-edu').textContent = t.t_edu;
+        document.getElementById('eduTitle').textContent = t.eduTitle;
+        document.getElementById('eduDate').textContent = t.eduDate;
+        document.getElementById('t-certs').textContent = t.t_certs;
+        document.getElementById('cert2').textContent = t.cert2;
+        document.getElementById('cert3').textContent = t.cert3;
+        document.getElementById('cert4').textContent = t.cert4;
+        document.getElementById('t-lang').textContent = t.t_lang;
+        document.getElementById('t-tools').textContent = t.t_tools;
+        document.getElementById('t-languages').textContent = t.t_languages;
+        document.getElementById('lang-es').textContent = t.lang_es;
+        document.getElementById('lang-en').textContent = t.lang_en;
+        document.getElementById('t-interests').textContent = t.t_interests;
+        document.getElementById('int1').textContent = t.int1;
+        document.getElementById('int2').textContent = t.int2;
+        document.getElementById('t-achieve').textContent = t.t_achieve;
+        document.getElementById('footerText').textContent = t.footerText;
+        document.getElementById('time1').textContent = t.time1;
+        document.getElementById('time2').textContent = t.time2;
+        document.getElementById('projTitle2').textContent = t.projTitle2;
+
+        // Actualizar HTML complejo (listas y negritas)
+        document.getElementById('role1').innerHTML = t.role1;
+        document.getElementById('desc1').innerHTML = t.desc1;
+        document.getElementById('role2').innerHTML = t.role2;
+        document.getElementById('desc2').innerHTML = t.desc2;
+        document.getElementById('proj1').innerHTML = t.proj1;
+        document.getElementById('proj2').innerHTML = t.proj2;
+        document.getElementById('achieveList').innerHTML = t.achieveList;
+    });
+
+    // --- Modo claro/oscuro (Existente) ---
     (function(){
       const root = document.documentElement;
       const btn = document.getElementById('themeBtn');
-      if (!root || !btn) return;
-
-      function setTheme(theme) {
-        root.setAttribute('data-theme', theme);
-        btn.textContent = theme === 'dark' ? 'Modo claro' : 'Modo oscuro';
-      }
-
-      let theme = 'light';
-      try {
-        const saved = localStorage.getItem('cv-theme');
-        if (saved === 'dark' || saved === 'light') {
-          theme = saved;
-        }
-      } catch (e) {
-        // si localStorage falla, seguimos con tema por defecto
-      }
-
-      setTheme(theme);
-
-      btn.addEventListener('click', function () {
-        const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-        const next = current === 'dark' ? 'light' : 'dark';
-        setTheme(next);
-        try {
-          localStorage.setItem('cv-theme', next);
-        } catch (e) {}
-      });
-    })();
-
-    // Cambio de idioma ES / EN
-    (function(){
-      const langBtn = document.getElementById('langBtn');
-      const cvEs = document.getElementById('cv-es');
-      const cvEn = document.getElementById('cv-en');
-      if (!langBtn || !cvEs || !cvEn) return;
-
-      let currentLang = 'es';
-
-      try {
-        const saved = localStorage.getItem('cv-lang');
-        if (saved === 'es' || saved === 'en') {
-          currentLang = saved;
-        }
-      } catch (e) {
-        // si localStorage falla, usamos 'es' por defecto
-      }
-
-      function updateLang() {
-        if (currentLang === 'es') {
-          cvEs.style.display = 'grid';
-          cvEn.style.display = 'none';
-          langBtn.textContent = 'English';
-        } else {
-          cvEs.style.display = 'none';
-          cvEn.style.display = 'grid';
-          langBtn.textContent = 'Español';
-        }
-        document.documentElement.lang = currentLang;
-      }
-
-      updateLang();
-
-      langBtn.addEventListener('click', function () {
-        currentLang = currentLang === 'es' ? 'en' : 'es';
-        updateLang();
-        try {
-          localStorage.setItem('cv-lang', currentLang);
-        } catch (e) {}
+      const saved = localStorage.getItem('cv-theme');
+      if (saved) root.setAttribute('data-theme', saved);
+      btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Modo claro' : 'Modo oscuro';
+      btn.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('cv-theme', next);
+        btn.textContent = next === 'dark' ? 'Modo claro' : 'Modo oscuro';
       });
     })();
   </script>
